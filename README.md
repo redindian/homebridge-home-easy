@@ -4,8 +4,9 @@ Also Siri will think it was unable to perform your action.
 
 # homebridge-home-easy
 HomeEasy plugin for homebridge: https://github.com/nfarina/homebridge
-Note: This plugin communicates with the Elro HE840IP.
-Set the correct ip_address in the configuration.
+
+This plugin communicates with the Elro HomeEasy HE840IP:
+http://www.elro.eu/en/products/cat/home-automation/home-easy-next/transmitters2/home-automation-gateway
 
 Based on the LightwaveRF plugin for HomeBridge:
 https://github.com/rooi/homebridge-home-easy
@@ -19,8 +20,7 @@ https://github.com/rooi/homebridge-home-easy
 
 # Configuration
 
-You can use the username, password and host to configure the plugin automatically using:
-Configuration sample:
+You can use the ip_address, username and password to configure the plugin automatically using:
 
  ```
 "platforms": [
@@ -35,8 +35,7 @@ Configuration sample:
 
 ```
 
-If you want you can specify the devices yourself using the
-following syntac:
+If you want you can specify the devices yourself using the following syntax:
 
  ```
 "platforms": [
@@ -65,6 +64,7 @@ following syntac:
         }
 ]
 ```
+# The following information needs to be updated for the HE840IP:
 
 The following devices are supported:
 - Light: "deviceType": "L"
