@@ -29,19 +29,28 @@ function HE840IP(config, callback) {
 
         addDefaultOptions(options, default_options);
 
-        //console.log('httpPost', options, data);
+        console.log('httpPost', options, data);
 
         httpRequest(options, data, callback);
     }
 
     function httpRequest(options, data, callback) {
         // Set up the request
-        var request = http.request(options, function (result) {
-            result.setEncoding('utf8');
-            result.on('data', function (chunk) {
-                //console.log('Response: ' + chunk);
-                callback(chunk);
+        var request = http.request(options, function (response) {
+            // Explicitly treat incoming data as utf8 (avoids issues with multi-byte chars)
+            response.setEncoding('utf8');
+            // Continuously update stream with data
+            var body = '';
+            response.on('data', function (chunk) {
+                body += chunk;
             });
+            response.on('end', function () {
+                //console.log('Response: ' + body);
+                callback(body);
+            });
+        }).on('error', function (err) {
+            // handle errors with the request itself
+            console.error('Error with the request:', err.message);
         });
 
         // post the data

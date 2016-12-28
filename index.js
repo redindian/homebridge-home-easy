@@ -24,7 +24,7 @@
 
 "use strict";
 
-var HE840IP = require("he840ip");
+var HE840IP = require("./he840ip");
 var fs = require('fs');
 var path = require('path');
 
