@@ -242,3 +242,5 @@ function HE840IP(config, callback) {
     this.turnDeviceOff = turnDeviceOff;
     this.setDeviceDim = setDeviceDim;
 }
+
+module.exports = HE840IP;
