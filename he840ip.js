@@ -19,6 +19,7 @@ function HE840IP(config, callback) {
 
         // An object of options to indicate where to post to
         var default_options = {
+            host: '127.0.0.1',
             port: '80',
             method: 'POST',
             headers: {

@@ -81,7 +81,7 @@ HomeEasyPlatform.prototype = {
             if (that.username && that.password) {
 
                 var api = new HE840IP({
-                    ip: that.ip_address,
+                    host: that.ip_address,
                     username: that.username,
                     password: that.password
                 }, function (devices) {
