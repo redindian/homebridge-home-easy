@@ -5,7 +5,7 @@ Also Siri will think it was unable to perform your action.
 # homebridge-home-easy
 HomeEasy plugin for homebridge: https://github.com/nfarina/homebridge
 
-This plugin communicates with the Elro HomeEasy HE840IP:
+This plugin communicates with the Elro HomeEasy Home automation gateway HE840IP:
 http://www.elro.eu/en/products/cat/home-automation/home-easy-next/transmitters2/home-automation-gateway
 
 Based on the LightwaveRF plugin for HomeBridge:
@@ -64,12 +64,10 @@ If you want you can specify the devices yourself using the following syntax:
         }
 ]
 ```
-# The following information needs to be updated for the HE840IP:
 
 The following devices are supported:
-- Light: "deviceType": "L"
-- Dimmable Light: "deviceType": "D"
-- Switch: "deviceType": "S"
+- Dimmable Light: "devtype": "dimmer"
+- Switch: "devtype": "switch"
 
 # How to Determine Room Number:
 
