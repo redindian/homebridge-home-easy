@@ -44,26 +44,18 @@ following syntac:
             "password": "111111",
             "devices": [
                 {
-                    "roomId": 1,
-                    "roomName": "LivingRoom",
-                    "deviceId": 1,
-                    "deviceName": "MyLight",
-                    "deviceType": "D"
+                    "roomid": 1,
+                    "roomname": "LivingRoom",
+                    "devid": 1,
+                    "devname": "MyLight",
+                    "devtype": "dimmer"
                 },
                 {
-                    "roomId": 1,
-                    "roomName": "LivingRoom",
-                    "deviceId": 2,
-                    "deviceName": "MyLight",
-                    "deviceType": "D"
-                },
-                {
-                    "roomId": 1,
-                    "roomName": "LivingRoom",
-                    "deviceId": 3,
-                    "deviceName": "MyGarageDoor",
-                    "deviceType": "G",
-                    "timeOut": 10
+                    "roomid": 1,
+                    "roomname": "LivingRoom",
+                    "devid": 2,
+                    "devname": "MyLight",
+                    "devtype": "switch"
                 }
             ]
         }
