@@ -1,3 +1,7 @@
+# DISCLAIMER
+This is a work in progress. Currently no status is set so you can only turn things on.
+Also Siri will think it was unable to perform your action.
+
 # homebridge-home-easy
 HomeEasy plugin for homebridge: https://github.com/nfarina/homebridge
 Note: This plugin communicates with the Elro HE840IP.
