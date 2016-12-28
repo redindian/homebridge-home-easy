@@ -1,0 +1,50 @@
+[
+  {
+    "devid": 3464,
+    "devname": "Kast",
+    "devtype": "switchdev",
+    "roomid": 1,
+    "roomname": "Woonkamer",
+    "roomtypeid": 2
+  },
+  {
+    "devid": 3906,
+    "devname": "Lavalamp",
+    "devtype": "switchdev",
+    "roomid": 1,
+    "roomname": "Woonkamer",
+    "roomtypeid": 2
+  },
+  {
+    "devid": 1682,
+    "devname": "Dressoir",
+    "devtype": "dimmer",
+    "roomid": 1,
+    "roomname": "Woonkamer",
+    "roomtypeid": 2
+  },
+  {
+    "devid": 2300,
+    "devname": "TV",
+    "devtype": "dimmer",
+    "roomid": 1,
+    "roomname": "Woonkamer",
+    "roomtypeid": 2
+  },
+  {
+    "devid": 3214,
+    "devname": "Plafond",
+    "devtype": "dimmer",
+    "roomid": 2,
+    "roomname": "Slaapkamer",
+    "roomtypeid": 1
+  },
+  {
+    "devid": 2010,
+    "devname": "Lichtslang",
+    "devtype": "switchdev",
+    "roomid": 6,
+    "roomname": "Tuin",
+    "roomtypeid": 9
+  }
+]

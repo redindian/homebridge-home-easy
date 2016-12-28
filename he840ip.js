@@ -34,24 +34,6 @@ function HE840IP(config, callback) {
         httpRequest(options, data, callback);
     }
 
-    function httpGet(options, data, callback) {
-        // Build the post string from an object
-        data = querystring.stringify(data);
-
-        // An object of options to indicate where to post to
-        var default_options = {
-            port: '80',
-            method: 'GET',
-            headers: {}
-        };
-
-        addDefaultOptions(options, default_options);
-
-        //console.log('httpGet', options, data);
-
-        httpRequest(options, data, callback);
-    }
-
     function httpRequest(options, data, callback) {
         // Set up the request
         var request = http.request(options, function (result) {
@@ -171,9 +153,9 @@ function HE840IP(config, callback) {
 
     // Expose
     this.host = config.host;
-    this.session = '';
-
     this.login = login;
+    this.session = '';
+    this.devices = [];
     this.allroomdevice = allroomdevice;
     this.devicecontrolsingledev = devicecontrolsingledev;
     this.switchon = switchon;
@@ -216,31 +198,47 @@ function HE840IP(config, callback) {
                     for (var v = 0, vl = values.length; v < vl; v++) {
                         var value = values[v];
                         addDefaultOptions(value, {
+                            devtype: type,
                             roomid: room.roomid,
                             roomname: room.roomname,
                             roomtypeid: room.roomtypeid
                         });
                         devices.push(value);
-
                     }
                 }
             }
-
+            that.devices = devices;
             callback(devices);
         });
     });
+
+    // First version, use LightwaveRF style function calls
+    function turnDeviceOn(roomid, deviceid, callback) {
+        switchon({
+            host: that.host,
+            session: that.session,
+            devid: deviceid
+        }, callback);
+    }
+
+    function turnDeviceOff(roomid, deviceid, callback) {
+        switchon({
+            host: config.host,
+            session: that.session,
+            devid: deviceid
+        }, callback);
+    }
+
+    function setDeviceDim(roomid, deviceid, value, callback) {
+        dimmerset({
+            host: that.host,
+            session: that.session,
+            devid: deviceid,
+            set: value
+        }, callback)
+    }
+
+    this.turnDeviceOn = turnDeviceOn;
+    this.turnDeviceOff = turnDeviceOff;
+    this.setDeviceDim = setDeviceDim;
 }
-
-/** Test **/
-
-var config = {host: '192.168.1.40', username: 'admin', password: '111111'};
-var that = {host: config.host, username: config.username, password: config.password};
-
-var api = new HE840IP({
-    host: that.host,
-    username: that.username,
-    password: that.password
-}, function (devices) {
-    console.log('devices', devices);
-});
-

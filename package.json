@@ -1,0 +1,18 @@
+{
+  "name": "homebridge-home-easy",
+  "version": "0.1.0",
+  "description": "Elro HE840IP plugin for homebridge: https://github.com/nfarina/homebridge",
+  "license": "ISC",
+  "keywords": [
+    "homebridge-plugin"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/redindian/Elro-HE840IP.git"
+  },
+
+  "engines": {
+    "node": ">=0.12.0",
+    "homebridge": ">=0.2.0"
+  }
+}
