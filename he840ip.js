@@ -30,7 +30,7 @@ function HE840IP(config, callback) {
 
         addDefaultOptions(options, default_options);
 
-        console.log('httpPost', options, data);
+        //console.log('httpPost', options, data);
 
         httpRequest(options, data, callback);
     }
@@ -122,12 +122,12 @@ function HE840IP(config, callback) {
     }
 
     function dimmerset(config, callback) {
-        var set = config.set;
-        if (set) {
-            if (set.indexOf('%') == -1 && !isNaN(parseFloat(set))) {
-                set += '%';
+        if (config.hasOwnProperty('value')) {
+            var value = String(config.value);
+            if (value.indexOf('%') == -1 && !isNaN(parseFloat(value))) {
+                value += '%';
             }
-            devicecontrolsingledev(config, 'dimmer', set, callback);
+            devicecontrolsingledev(config, 'dimmer', value, callback);
         }
     }
 
@@ -244,7 +244,7 @@ function HE840IP(config, callback) {
             host: that.host,
             session: that.session,
             devid: deviceid,
-            set: value
+            value: value
         }, callback)
     }
 
