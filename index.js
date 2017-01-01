@@ -57,7 +57,7 @@ function HomeEasyAccessory(log, device, api) {
     this.isLight = this.isDimmer;
     this.isSwitch = (device.devtype.indexOf('switch') > -1);
     this.status = 0; // 0 = off, else on / percentage
-    this.previousPercentage = 0;
+    this.previousPercentage = 75;  // default dimmer percentage
     this.api = api;
     this.log = log;
     this.timeOut = device.timeOut ? device.timeOut : 2;
@@ -133,7 +133,7 @@ HomeEasyAccessory.prototype = {
     // Create and set a light state
     executeChange: function (characteristic, value, callback) {
 
-        this.log("Set " + this.name + ", characteristic: " + characteristic + ", status: " + this.status + ", value: " + value + ".");
+        this.log("Set " + this.name + ", characteristic: " + characteristic + ", status: " + this.status + (this.isDimmer ? ", dimmer percentage: " + this.previousPercentage : "") + ", value: " + value + ".");
 
         switch (characteristic.toLowerCase()) {
             case 'identify':
@@ -150,20 +150,21 @@ HomeEasyAccessory.prototype = {
                 setTimeout(function () {
                     that.api.turnDeviceOff(that.roomId, that.deviceId);
                 }, 3000);
-                if (callback) callback();
                 break;
             case 'power':
                 if (value > 0) {
                     if (this.isDimmer) {
-                        if (this.previousPercentage < 3.125) this.previousPercentage = 100; // Prevent very low last states
-                        this.api.setDeviceDim(this.roomId, this.deviceId, this.previousPercentage, callback);
+                        // Prevent very low last states
+                        if (this.previousPercentage < 3.125) {
+                            this.previousPercentage = 100;
+                        }
+                        this.api.setDeviceDim(this.roomId, this.deviceId, this.previousPercentage);
                         //this.status = this.previousPercentage;
                     } else {
                         this.api.turnDeviceOn(this.roomId, this.deviceId);
                         this.status = 100;
                     }
-                }
-                else {
+                } else {
                     //this.previousPercentage = 0;
                     this.api.turnDeviceOff(this.roomId, this.deviceId);
                     this.status = 0;
