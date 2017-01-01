@@ -156,13 +156,13 @@ HomeEasyAccessory.prototype = {
                         this.api.setDeviceDim(this.roomId, this.deviceId, this.previousPercentage, callback);
                         //this.status = this.previousPercentage;
                     } else {
-                        this.api.turnDeviceOn(this.roomId, this.deviceId, callback);
+                        this.api.turnDeviceOn(this.roomId, this.deviceId);
                         this.status = 100;
                     }
                 }
                 else {
                     //this.previousPercentage = 0;
-                    this.api.turnDeviceOff(this.roomId, this.deviceId, callback);
+                    this.api.turnDeviceOff(this.roomId, this.deviceId);
                     this.status = 0;
                 }
                 break;
@@ -170,16 +170,15 @@ HomeEasyAccessory.prototype = {
                 this.previousPercentage = value;
                 // Only write when change is larger than 5
                 this.status = value;
-                //if((value % 5) == 0) {
                 if (value > 0 && this.lightbulbService && !this.lightbulbService.getCharacteristic(Characteristic.On)) {
                     this.lightbulbService.getCharacteristic(Characteristic.On).setValue(true);
                 }
-                this.api.setDeviceDim(this.roomId, this.deviceId, value, callback);
-                //} else {
-                //    if(callback) callback();
-                //}
+                this.api.setDeviceDim(this.roomId, this.deviceId, value);
+
                 break;
-        }//.bind(this));
+        }
+
+        if(callback) callback();
     },
 
     // Read light state
