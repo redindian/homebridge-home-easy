@@ -152,6 +152,8 @@ function HE840IP(config, callback) {
             sessid: config.session
         };
 
+        console.log('devicecontrolsingledev', data);
+
         postDevicecontrol(options, data, callback);
     }
 

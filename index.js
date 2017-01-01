@@ -57,7 +57,7 @@ function HomeEasyAccessory(log, device, api) {
     this.isLight = this.isDimmer;
     this.isSwitch = (device.devtype.indexOf('switch') > -1);
     this.status = 0; // 0 = off, else on / percentage
-    this.previousPercentage = 75;  // default dimmer percentage
+    this.previousPercentage = 60;  // default dimmer percentage, allowed: 10, 20, 30, 40, 50, 60, 70, 80
     this.api = api;
     this.log = log;
     this.timeOut = device.timeOut ? device.timeOut : 2;
@@ -151,34 +151,33 @@ HomeEasyAccessory.prototype = {
                     that.api.turnDeviceOff(that.roomId, that.deviceId);
                 }, 3000);
                 break;
+
             case 'power':
+                // On/off
                 if (value > 0) {
                     if (this.isDimmer) {
-                        // Prevent very low last states
-                        if (this.previousPercentage < 3.125) {
-                            this.previousPercentage = 100;
-                        }
                         this.api.setDeviceDim(this.roomId, this.deviceId, this.previousPercentage);
-                        //this.status = this.previousPercentage;
                     } else {
                         this.api.turnDeviceOn(this.roomId, this.deviceId);
                         this.status = 100;
                     }
                 } else {
-                    //this.previousPercentage = 0;
                     this.api.turnDeviceOff(this.roomId, this.deviceId);
                     this.status = 0;
                 }
                 break;
-            case 'brightness':
-                this.previousPercentage = value;
-                // Only write when change is larger than 5
-                this.status = value;
-                if (value > 0 && this.lightbulbService && !this.lightbulbService.getCharacteristic(Characteristic.On)) {
-                    this.lightbulbService.getCharacteristic(Characteristic.On).setValue(true);
-                }
-                this.api.setDeviceDim(this.roomId, this.deviceId, value);
 
+            case 'brightness':
+                // Allowed percentage steps are: 10, 20, 30, 40, 50, 60, 70, 80
+                var percentage = Math.ceil(value / (100 / 8) * 10);
+                this.log(characteristic, 'previousPercentage: ' + this.previousPercentage + ', percentage: ' + percentage);
+                if (this.previousPercentage != percentage) {
+                    this.previousPercentage = percentage;
+                    this.api.setDeviceDim(this.roomId, this.deviceId, percentage);
+                    if (value > 0 && this.lightbulbService && !this.lightbulbService.getCharacteristic(Characteristic.On)) {
+                        this.lightbulbService.getCharacteristic(Characteristic.On).setValue(true);
+                    }
+                }
                 break;
         }
 
