@@ -47,7 +47,9 @@ function HE840IP(config, callback) {
             });
             response.on('end', function () {
                 //console.log('Response: ' + body);
-                callback(body);
+                if (typeof callback == 'function') {
+                    callback(body);
+                }
             });
         }).on('error', function (err) {
             // handle errors with the request itself
@@ -75,7 +77,9 @@ function HE840IP(config, callback) {
             var data = JSON.parse(repsonse);
             if (data && data.result == 200 && data.sessvalid == 100 && data.session) {
                 //console.log('success', data.session);
-                callback(data);
+                if (typeof callback == 'function') {
+                    callback(data);
+                }
             } else {
                 console.log('error, could not login', repsonse);
             }
@@ -98,7 +102,9 @@ function HE840IP(config, callback) {
             var data = JSON.parse(repsonse);
             if (data && data.result == 200 && data.sessvalid == 100 && data.room) {
                 //console.log('success', data.room);
-                callback(data);
+                if (typeof callback == 'function') {
+                    callback(data);
+                }
             } else {
                 console.log('error, could not get rooms', repsonse);
             }
@@ -154,7 +160,9 @@ function HE840IP(config, callback) {
             var data = JSON.parse(repsonse);
             if (data && data.result == 200 && data.sessvalid == 100) {
                 console.log('success', data);
-                callback(data);
+                if (typeof callback == 'function') {
+                    callback(data);
+                }
             } else {
                 console.log('error, could not control device', repsonse);
             }
@@ -218,7 +226,9 @@ function HE840IP(config, callback) {
                 }
             }
             that.devices = devices;
-            callback(devices);
+            if (typeof callback == 'function') {
+                callback(devices);
+            }
         });
     });
 

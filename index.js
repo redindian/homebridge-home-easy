@@ -178,7 +178,9 @@ HomeEasyAccessory.prototype = {
                 break;
         }
 
-        if(callback) callback();
+        if (typeof callback == 'function') {
+            callback();
+        }
     },
 
     // Read light state
