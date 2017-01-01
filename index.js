@@ -132,6 +132,9 @@ HomeEasyAccessory.prototype = {
 
     // Create and set a light state
     executeChange: function (characteristic, value, callback) {
+
+        this.log("Set " + this.device.name + ", characteristic: " + characteristic + ", status: " + this.status + ", value: " + value + ".");
+
         switch (characteristic.toLowerCase()) {
             case 'identify':
                 // Turn on twice to let the light blink
@@ -201,9 +204,7 @@ HomeEasyAccessory.prototype = {
             }
 
             callback = null;
-
-            //this.log("Get " + that.device.name + ", characteristic: " + characteristic + ", value: " + value + ".");
-        }//.bind(this));
+        }
     },
 
     // Respond to identify request
@@ -278,7 +279,6 @@ HomeEasyAccessory.prototype = {
 
         if (this.lightbulbService) return [informationService, this.lightbulbService];
         else if (this.switchService) return [informationService, this.switchService];
-        else if (this.openerService) return [informationService, this.openerService];
         else return [informationService];
     }
 };
