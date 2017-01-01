@@ -198,7 +198,7 @@ function HE840IP(config, callback) {
                 host: config.host,
                 session: session
             }, function(data) {
-                that.log('Keep alive', data);
+                console.log('Keep alive', data);
             });
         }, 60 * 1000);
 
