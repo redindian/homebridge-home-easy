@@ -242,7 +242,7 @@ function HE840IP(config, callback) {
     }
 
     function turnDeviceOff(roomid, deviceid, callback) {
-        switchon({
+        switchoff({
             host: config.host,
             session: that.session,
             devid: deviceid

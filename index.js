@@ -133,7 +133,7 @@ HomeEasyAccessory.prototype = {
     // Create and set a light state
     executeChange: function (characteristic, value, callback) {
 
-        this.log("Set " + this.device.name + ", characteristic: " + characteristic + ", status: " + this.status + ", value: " + value + ".");
+        this.log("Set " + this.name + ", characteristic: " + characteristic + ", status: " + this.status + ", value: " + value + ".");
 
         switch (characteristic.toLowerCase()) {
             case 'identify':
