@@ -169,7 +169,7 @@ HomeEasyAccessory.prototype = {
 
             case 'brightness':
                 // Allowed percentage steps are: 10, 20, 30, 40, 50, 60, 70, 80
-                var percentage = Math.ceil(value / (100 / 8) * 10);
+                var percentage = Math.ceil(value / (100 / 8)) * 10;
                 this.log(characteristic, 'previousPercentage: ' + this.previousPercentage + ', percentage: ' + percentage);
                 if (this.previousPercentage != percentage) {
                     this.previousPercentage = percentage;
