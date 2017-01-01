@@ -63,52 +63,32 @@ function HE840IP(config, callback) {
 
     function login(config, callback) {
 
-        var post_options = {
+        var options = {
             host: config.host,
             path: '/cgi-bin/uservalid.cgi'
         };
 
-        var post_data = {
+        var data = {
             UserName: config.username,
             UserPassword: config.password
         };
 
-        httpPost(post_options, post_data, function (repsonse) {
-            var data = JSON.parse(repsonse);
-            if (data && data.result == 200 && data.sessvalid == 100 && data.session) {
-                //console.log('success', data.session);
-                if (typeof callback == 'function') {
-                    callback(data);
-                }
-            } else {
-                console.log('error, could not login', repsonse);
-            }
-        });
+        httpApiPost(options, data, callback);
     }
 
     function allroomdevice(config, callback) {
 
-        var post_options = {
+        var options = {
             host: config.host,
             path: '/cgi-bin/allroomdevice.cgi'
         };
 
-        var post_data = {
+        var data = {
             optype: 'select',
             sessid: config.session
         };
 
-        httpPost(post_options, post_data, function (repsonse) {
-            var data = JSON.parse(repsonse);
-            if (data && data.result == 200 && data.sessvalid == 100 && data.room) {
-                //console.log('success', data.room);
-                if (typeof callback == 'function') {
-                    callback(data);
-                }
-            } else {
-                console.log('error, could not get rooms', repsonse);
-            }
-        });
+        httpApiPost(options, data, callback);
     }
 
     function switchon(config, callback) {
@@ -154,19 +134,36 @@ function HE840IP(config, callback) {
 
         console.log('devicecontrolsingledev', data);
 
-        postDevicecontrol(options, data, callback);
+        httpApiPost(options, data, callback);
     }
 
-    function postDevicecontrol(options, data, callback) {
-        httpPost(options, data, function (repsonse) {
-            var data = JSON.parse(repsonse);
+    function othersettinggetdatetime(config, callback) {
+
+        var options = {
+            host: config.host,
+            path: '/cgi-bin/othersetting.cgi'
+        };
+
+        var data = {
+            optype: 'getdatetime',
+            sessid: config.session
+        };
+
+        console.log('othersettinggetdatetime', data);
+
+        httpApiPost(options, data, callback);
+    }
+
+    function httpApiPost(options, data, callback) {
+        httpPost(options, data, function (response) {
+            var data = JSON.parse(response);
             if (data && data.result == 200 && data.sessvalid == 100) {
                 console.log('success', data);
                 if (typeof callback == 'function') {
                     callback(data);
                 }
             } else {
-                console.log('error, could not control device', repsonse);
+                console.log('error, unexpected response', response);
             }
         });
     }
@@ -186,6 +183,7 @@ function HE840IP(config, callback) {
 
     var that = this;
 
+    // Initialization
     login({
         host: config.host,
         username: config.username,
@@ -193,6 +191,16 @@ function HE840IP(config, callback) {
     }, function (data) {
         var session = data.session;
         that.session = session;
+
+        // Keep alive every minute
+        setInterval(function() {
+            othersettinggetdatetime({
+                host: config.host,
+                session: session
+            }, function(data) {
+                that.log('Keep alive', data);
+            });
+        }, 60 * 1000);
 
         allroomdevice({
             host: config.host,
