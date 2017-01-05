@@ -1,6 +1,5 @@
 # DISCLAIMER
-This is a work in progress. Currently no status is set so you can only turn things on.
-Also Siri will think it was unable to perform your action.
+This is a work in progress. Currently switches and dimmers are supported including settings percentages. The Elro HE840IP does not support getting status of devices. A future release will include saving dimmer settings and switch status to a file. These settings may not be correct if normal remotes are being used also.
 
 # homebridge-home-easy
 HomeEasy plugin for homebridge: https://github.com/nfarina/homebridge
