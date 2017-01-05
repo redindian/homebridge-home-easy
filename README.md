@@ -78,4 +78,4 @@ The following devices are supported:
 
 - Log in to HE840IP
 - Select Inspect Element of the device button.
-- Serch for getdeviceid element to get the device id.
+- Search for getdeviceid element to get the device id.
