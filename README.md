@@ -4,7 +4,7 @@ This is a work in progress. Currently switches and dimmers are supported includi
 # homebridge-home-easy
 HomeEasy plugin for homebridge: https://github.com/nfarina/homebridge
 
-This plugin communicates with the Elro HE840IP Home Easy IP control system / home automation gateway:
+This plugin communicates with the Elro HomeEasy IP-BOX HE840IP transmitter  / home automation gateway:
 http://service.smartwares.eu/en-us/product/10.001.58/he840ip-home-easy-ip-control-system.aspx
 
 Based on the LightwaveRF plugin for HomeBridge:
