@@ -70,14 +70,12 @@ The following devices are supported:
 
 # How to Determine Room Number:
 
-Log in to HE840IP
-View All Rooms
-Show Inspect Element of the room button.
-Search for roomId element to get the room number.
+- Log in to HE840IP
+- Show Inspect Element of the room button.
+- Search for roomId element to get the room number.
 
 # How to Determine Device Number:
 
-Log in to HE840IP
-View All Rooms
-Select Inspect Element of the device button.
-Serch for getdeviceid element to get the device id.
+- Log in to HE840IP
+- Select Inspect Element of the device button.
+- Serch for getdeviceid element to get the device id.
