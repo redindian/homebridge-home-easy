@@ -72,13 +72,12 @@ The following devices are supported:
 
 Log in to HE840IP
 View All Rooms
-Select the room in question
-Show Page Source
-Search in Page Source for "All Off" -The Required value is in the data-room_number= attribute of that line
+Show Inspect Element of the room button.
+Search for roomId element to get the room number.
 
 # How to Determine Device Number:
 
 Log in to HE840IP
 View All Rooms
-Select the room in question
-Device Number is usually the order in which the devices are listed, but this does not account for adding and removing devices. This may take some trial and error.
+Select Inspect Element of the device button.
+Serch for getdeviceid element to get the device id.
